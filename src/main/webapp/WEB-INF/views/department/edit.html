@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${department}" th:action="@{/updateDepartment}" method="post">
+    <fieldset style="width: fit-content; height: fit-content">
+        <legend><h2 style="color:crimson;">Update Department Detail</h2></legend>
+        <p hidden>Department ID:&nbsp;<input th:field="*{id}"></p>
+        <p>Department Name:&nbsp;<input  th:field="*{name}"></p>
+    </fieldset>
+    <p><button type="submit" onclick="return confirm('Are You Sure?')">Update Entry</button></p>
+</form>
+<p><a th:href="@{/listDepartment}"><button type="button">Back</button></a></p>
+</body>
+</html>

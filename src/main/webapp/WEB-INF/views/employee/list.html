@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table {
+        margin: auto;
+        border: 2px solid black;
+        margin-left: 30px;
+    }
+    tr {
+        border: 2px solid black;
+        margin: auto;
+        padding: 15px;
+    }
+
+    td {
+        margin: auto;
+        border: 2px solid black;
+        text-align: center;
+        padding: 15px;
+        font-weight: bolder;
+    }
+</style>
+<body>
+<p><a th:href="@{/listDepartment}"><button type="button">Go to DepartmentList</button></a></p>
+<p><a th:href="@{/newEmployee}"><button type="button">Create New Employee</button></a></p>
+<p></p>
+<p><a th:href="@{/sortBySalaryAsc}"><button type="button">Sort By Salary Asc</button></a></p>
+<p><a th:href="@{/sortBySalaryDesc}"><button type="button">Sort By Salary Desc</button></a></p>
+<form action="/searchByDepartment" onchange="this.submit()">
+    <a>Search By Department:</a>
+    <select name="srch">
+        <option th:each="d:${departments}" th:text="${d.name}" th:value="${d.getId()}"></option>
+    </select>
+</form>
+<form>
+    <fieldset style="width: fit-content; height: fit-content">
+        <legend><h2 style="color:red;">Employee List</h2></legend>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>Employee Name</td>
+                <td>Date Of Birth</td>
+                <td>Address</td>
+                <td>Salary</td>
+                <td>Department</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="employee: ${employees}">
+                <td th:text="${employee.getId()}"></td>
+                <td><a th:text="${employee.getName()}" th:href="@{/__${employee.getId()}__/viewEmployee}"></a></td>
+                <td th:text="${employee.getDoB()}"></td>
+                <td th:text="${employee.getAddress()}"></td>
+                <td th:text="${employee.getSalary()}"></td>
+                <td th:text="${employee.getDepartment().getName()}"></td>
+                <td><a th:href="@{/__${employee.getId()}__/editEmployee}"><button type="button">Edit</button></a></td>
+                <td><a th:href="@{/__${employee.getId()}__/deleteEmployee}" onclick="return confirm('Are You Sure?')"><button type="button">Delete</button></a></td>
+            </tr>
+        </table>
+        <div style="margin-top: 15px">
+            <a th:href="@{''(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">Previous</a>
+            <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
+            <a th:href="@{''(page=${employees.number + 1})}" th:if="${employees.hasNext()}">Next</a>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table {
+        margin: auto;
+        border: 2px solid black;
+        margin-left: 30px;
+    }
+    tr {
+        border: 2px solid black;
+        margin: auto;
+        padding: 15px;
+    }
+
+    td {
+        margin: auto;
+        border: 2px solid black;
+        text-align: center;
+        padding: 15px;
+        font-weight: bolder;
+    }
+</style>
+<body>
+<p><a th:href="@{/}"><button type="button">Go to EmployeeList</button></a></p>
+<p><a th:href="@{/newDepartment}"><button type="button">Create New Department</button></a></p>
+<form>
+    <fieldset style="width: fit-content; height: fit-content">
+        <legend><h2 style="color:red;">DepartmentList</h2></legend>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>Department Name</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="department: ${departments}">
+                <td th:text="${department.getId()}"></td>
+                <td><a th:text="${department.getName()}" th:href="@{/__${department.getId()}__/viewDepartment}"></a></td>
+                <td><a th:href="@{/__${department.getId()}__/editDepartment}"><button type="button">Edit</button></a></td>
+                <td><a th:href="@{/__${department.getId()}__/deleteDepartment}" onclick="return confirm('Are You Sure?')"><button type="button">Delete</button></a></td>
+            </tr>
+        </table>
+        <div style="margin-top: 15px">
+            <a th:href="@{''(page=${departments.number - 1})}" th:if="${departments.hasPrevious()}">Previous</a>
+            <span th:text="${departments.number + 1}"></span>/<span th:text="${departments.totalPages}"></span>
+            <a th:href="@{''(page=${departments.number + 1})}" th:if="${departments.hasNext()}">Next</a>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

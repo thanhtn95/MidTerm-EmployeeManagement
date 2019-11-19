@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset style="width: fit-content; height: fit-content">
+    <legend><h2 style="color:blue;">Department Detail</h2></legend>
+    <p>Department ID:&nbsp;<input readonly th:value="${department.getId()}"></p>
+    <p>Department Name:&nbsp;<input readonly th:value="${department.getName()}"></p>
+</fieldset>
+<p><a th:href="@{/listDepartment}"><button type="button">Back</button></a></p>
+</body>
+</html>

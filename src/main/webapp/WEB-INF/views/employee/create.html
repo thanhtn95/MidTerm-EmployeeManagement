@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${employee}" th:action="@{/newEmployee}" method="post">
+   <fieldset style="height: fit-content; width: fit-content">
+       <legend><h2 style="color: darkblue">New Employee Entry</h2></legend>
+       <p>Name:&nbsp;<input th:field="*{name}"></p>
+       <p>Date Of Birth:&nbsp;<input  th:field="*{doB}"></p>
+       <p>Address:&nbsp;<input type="text" th:field="*{address}"></p>
+       <p>Salary:&nbsp;<input type="number" th:field="*{salary}"></p>
+       <p>
+           <select th:field="*{department}">
+               <option th:each="d:${departments}" th:text="${d.name}" th:value="${d.getId()}"></option>
+           </select>
+       </p>
+   </fieldset>
+    <p><button type="submit">Add New Entry</button></p>
+</form>
+</body>
+</html>

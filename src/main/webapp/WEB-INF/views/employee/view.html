@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset style="width: fit-content; height: fit-content">
+    <legend><h2 style="color:blue;">Employee Detail</h2></legend>
+    <p>ID:&nbsp;<input readonly th:value="${employee.getId()}"></p>
+    <p>Name:&nbsp;<input readonly th:value="${employee.getName()}"></p>
+    <p>Date Of Birth:&nbsp;<input readonly th:value="${employee.getDoB()}"></p>
+    <p>Address:&nbsp;<input readonly th:value="${employee.getAddress()}"></p>
+    <p>Salary:&nbsp;<input readonly th:value="${employee.getSalary()}"></p>
+    <p>Department Name:&nbsp;<input readonly th:value="${employee.getDepartment().getName()}"></p>
+</fieldset>
+<p><a th:href="@{/}"><button type="button">Back</button></a></p>
+</body>
+</html>
