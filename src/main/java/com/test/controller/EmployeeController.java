@@ -88,7 +88,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/sortBySalaryAsc")
-    public ModelAndView getEmployeeSortBySalaryAsc( Pageable pageable){
+    public ModelAndView getEmployeeSortBySalaryAsc(@PageableDefault(size = 2) Pageable pageable){
         Page<Employee> employees = employeeService.findAllByOrderBySalaryAsc(pageable);
         ModelAndView modelAndView = new ModelAndView("/employee/list");
         modelAndView.addObject("employees",employees);
@@ -96,7 +96,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/sortBySalaryDesc")
-    public ModelAndView getEmployeeSortBySalaryDesc( Pageable pageable){
+    public ModelAndView getEmployeeSortBySalaryDesc(@PageableDefault(size = 2) Pageable pageable){
         Page<Employee> employees = employeeService.findAllByOrderBySalaryDesc(pageable);
         ModelAndView modelAndView = new ModelAndView("/employee/list");
         modelAndView.addObject("employees",employees);
