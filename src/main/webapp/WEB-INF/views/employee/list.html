@@ -33,7 +33,7 @@
 <form action="/searchByDepartment" onchange="this.submit()">
     <a>Search By Department:</a>
     <select name="srch">
-        <option th:each="d:${departments}" th:text="${d.name}" th:value="${d.getId()}"></option>
+        <option th:each="d:${departments}" th:text="${d.name}" th:value="${d.getId()}" th:selected="(${d.id} == ${srch})"></option>
     </select>
 </form>
 <form>
@@ -61,10 +61,19 @@
                 <td><a th:href="@{/__${employee.getId()}__/deleteEmployee}" onclick="return confirm('Are You Sure?')"><button type="button">Delete</button></a></td>
             </tr>
         </table>
-        <div style="margin-top: 15px">
-            <a th:href="@{''(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">Previous</a>
-            <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
-            <a th:href="@{''(page=${employees.number + 1})}" th:if="${employees.hasNext()}">Next</a>
+        <div th:if="!${srch}">
+            <div style="margin-top: 15px">
+                <a th:href="@{''(page=${employees.number - 1})}" th:if="${employees.hasPrevious()}">Previous</a>
+                <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
+                <a th:href="@{''(page=${employees.number + 1})}" th:if="${employees.hasNext()}">Next</a>
+            </div>
+        </div>
+        <div th:if="${srch}">
+            <div style="margin-top: 15px">
+                <a th:href="@{''(page=${employees.number - 1},srch=${srch})}" th:if="${employees.hasPrevious()}">Previous</a>
+                <span th:text="${employees.number + 1}"></span>/<span th:text="${employees.totalPages}"></span>
+                <a th:href="@{''(page=${employees.number + 1},srch=${srch})}" th:if="${employees.hasNext()}">Next</a>
+            </div>
         </div>
     </fieldset>
 </form>

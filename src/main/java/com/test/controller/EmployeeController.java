@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
 
 
 @Controller
@@ -79,11 +80,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/searchByDepartment")
-    public ModelAndView getEmployeeByDepartment(@RequestParam("srch") String search, Pageable pageable){
+    public ModelAndView getEmployeeByDepartment(@RequestParam("srch") String search, @PageableDefault(size = 1) Pageable pageable){
         Department department = departmentService.findById(Integer.parseInt(search));
         Page<Employee> employees = employeeService.findAllByDepartment(pageable,department);
         ModelAndView modelAndView = new ModelAndView("/employee/list");
         modelAndView.addObject("employees",employees);
+        modelAndView.addObject("srch",search);
         return modelAndView;
     }
 
